@@ -430,6 +430,7 @@
         <div class="header">
             <h1>ATMO MESO 905</h1>
             <p>APARTAMENTO — APORTES, GASTOS E FINANCIAMENTO</p>
+            <button onclick="clearAllData()" style="margin-top: 20px; padding: 8px 16px; font-size: 12px; background: #666; color: #fff; border: none; border-radius: 4px; cursor: pointer; opacity: 0.6;">Limpar Dados</button>
         </div>
 
         <!-- MAIN GRID -->
@@ -728,6 +729,16 @@
             }
         }
 
+        // Clear all data (reset)
+        function clearAllData() {
+            if (confirm('⚠️ Limpar TODOS os dados? Esta ação não pode ser desfeita.')) {
+                data = { aportes: [], gastos: [], amortizacoes: [] };
+                localStorage.removeItem('atmoMeso905');
+                updateUI();
+                alert('✓ Dados limpos. Dashboard resetado.');
+            }
+        }
+
         // Save to localStorage
         function saveData() {
             localStorage.setItem('atmoMeso905', JSON.stringify(data));
@@ -974,7 +985,7 @@
             saldoElement.textContent = formatCurrency(saldo);
             saldoElement.className = 'card-value ' + (saldo >= 0 ? 'positive' : 'negative');
 
-            const valorImovel = 829999 + totals.totalGasto2026;
+            const valorImovel = 250000 + totals.totalGasto2026;
             document.getElementById('dashValorTotal').textContent = formatCurrency(valorImovel);
 
             // Aport table
